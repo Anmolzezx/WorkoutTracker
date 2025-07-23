@@ -5,7 +5,7 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -48,6 +48,7 @@ module.exports = {
           700: "#666666",
           800: "#4D4D4D",
           900: "#333333",
+          1000: "#D9D9D9",
         },
         success: {
           100: "#F0FFF4",
@@ -91,6 +92,7 @@ module.exports = {
           600: "#E6F3FF",
           700: "#EBEBEB",
           800: "#ADADAD",
+          1000: "#FC713A",
         },
       },
     },

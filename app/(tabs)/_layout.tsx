@@ -1,50 +1,82 @@
 import { Tabs } from "expo-router";
-import React from "react";
-import { Platform } from "react-native";
+import { Image, ImageSourcePropType, View } from "react-native";
+import { icons } from "@/constants";
 
-import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
-          },
-          default: {},
-        }),
-      }}
+const TabIcon = ({
+  source,
+  focused,
+}: {
+  source: ImageSourcePropType;
+  focused: boolean;
+}) => (
+  <View
+    className={`flex flex-row justify-center items-center rounded-full ${focused ? "bg-general-300" : ""}`}
+  >
+    <View
+      className={`rounded-full w-14 h-12 items-center justify-center ${focused ? "bg-general-1000" : ""}`}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
-          ),
-        }}
+      <Image
+        source={source}
+        tintColor="white"
+        resizeMode="contain"
+        className="w-7 h-7"
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Detail",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
-}
+    </View>
+  </View>
+);
+const Layout = () => (
+  <Tabs
+    initialRouteName="home"
+    screenOptions={{
+      tabBarActiveTintColor: "white",
+      tabBarInactiveTintColor: "white",
+      tabBarShowLabel: false,
+      tabBarStyle: {
+        backgroundColor: "#333333",
+        borderRadius: 50,
+        paddingBottom: 30,
+        overflow: "hidden",
+        marginHorizontal: 20,
+        marginBottom: 20,
+        height: 78,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexDirection: "row",
+        position: "absolute",
+      },
+    }}
+  >
+    <Tabs.Screen
+      name="home"
+      options={{
+        title: "Home",
+        headerShown: false,
+        tabBarIcon: ({ focused }) => (
+          <TabIcon focused={focused} source={icons.home} />
+        ),
+      }}
+    />
+    <Tabs.Screen
+      name="detail"
+      options={{
+        title: "Detail",
+        headerShown: false,
+        tabBarIcon: ({ focused }) => (
+          <TabIcon focused={focused} source={icons.detail} />
+        ),
+      }}
+    />
+    <Tabs.Screen
+      name="history"
+      options={{
+        title: "History",
+        headerShown: false,
+        tabBarIcon: ({ focused }) => (
+          <TabIcon focused={focused} source={icons.history} />
+        ),
+      }}
+    />
+  </Tabs>
+);
+export default Layout;
