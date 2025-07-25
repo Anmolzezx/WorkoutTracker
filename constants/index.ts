@@ -10,6 +10,9 @@ import person from "@/assets/icons/person.png";
 import homeHeader from "@/assets/images/home_header.png";
 import animoji from "@/assets/images/animoji.png";
 import logOut from "@/assets/icons/logout.png";
+import backArrow from "@/assets/icons/back-arrow.png";
+import pause from "@/assets/icons/pause.png";
+import quit from "@/assets/icons/quit.png";
 
 export const images = {
   orange,
@@ -26,4 +29,7 @@ export const icons = {
   lock,
   person,
   logOut,
+  backArrow,
+  pause,
+  quit,
 };
