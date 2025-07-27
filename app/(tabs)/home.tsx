@@ -33,7 +33,14 @@ const workouts = [
 export default function HomeScreen() {
   const email = auth.currentUser?.email;
   const username = email ? email.split("@")[0] : "User";
-  const timer = () => router.navigate("/timerPage");
+  const timer = (item: (typeof workouts)[0]) =>
+    router.navigate({
+      pathname: "/timerPage",
+      params: {
+        exercises: JSON.stringify(item.exercises),
+        workoutName: item.name,
+      },
+    });
   const logout = () => {
     signOut(auth)
       .then(() => {
@@ -59,7 +66,7 @@ export default function HomeScreen() {
         </Text>
       </View>
       <TouchableOpacity
-        onPress={timer}
+        onPress={() => timer(item)}
         className="absolute bottom-0 right-0 mr-5 mb-4 bg-general-1000 rounded-full w-[73px] h-[73px] items-center justify-center"
       >
         <Text className="text-white font-bold text-[24px] ">Start</Text>

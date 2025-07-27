@@ -3,90 +3,66 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images } from "@/constants";
 import { auth } from "@/lib/firebase";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React from "react";
 
-const workouts = [
-  {
-    id: "1",
-    name: "Full Body Blast",
-    exercises: ["Push-ups", "Squats", "Burpees"],
-  },
-  {
-    id: "2",
-    name: "Upper Body Strength",
-    exercises: ["Pull-ups", "Push-ups", "Dips"],
-  },
-  {
-    id: "3",
-    name: "Core Crusher",
-    exercises: ["Plank", "Sit-ups", "Leg Raises"],
-  },
+// Expanded exercise list, different from home.tsx
+const exercises = [
+  "Plank",
+  "High Knees",
+  "Russian Twists",
+  "Superman",
+  "Bicycle Crunches",
+  "Wall Sit",
+  "Jump Squats",
+  "Reverse Lunges",
+  "Side Plank",
+  "Flutter Kicks",
+  "Bear Crawl",
+  "Donkey Kicks",
+  "Inchworms",
+  "Toe Touches",
+  "Skaters",
+  "Mountain Climbers",
+  "V-Ups",
+  "Jumping Lunges",
+  "Single Leg Glute Bridge",
+  "Dead Bug",
 ];
 
 const Detail = () => {
   const email = auth.currentUser?.email;
   const username = email ? email.split("@")[0] : "User";
-  const [selectedWorkout, setSelectedWorkout] = useState<number | null>(null);
 
-  // Start timer and auto-advance through exercises
-  const startWorkout = (workoutIdx: number) => {
-    setSelectedWorkout(workoutIdx);
+  const startWorkout = () => {
     router.navigate({
       pathname: "/timerPage",
       params: {
-        exercises: JSON.stringify(workouts[workoutIdx].exercises),
-        workoutName: workouts[workoutIdx].name,
+        exercises: JSON.stringify(exercises),
+        workoutName: "All Exercises",
       },
     });
   };
 
-  const renderWorkout = ({
-    item,
-    index,
-  }: {
-    item: (typeof workouts)[0];
-    index: number;
-  }) => (
-    <View className="flex bg-secondary-1000 W-[363px] h-[164px] rounded-[65px] mt-8 mr-4 ml-4 ">
-      <View className="justify-center items-center">
-        <Text className="text-black text-[24px] font-bold ">{item.name}</Text>
-      </View>
-      <View className="items-start ml-[45px]">
-        <Text className="text-[30px] font-bold text-general-1000 ">
-          Exercise
-        </Text>
-        <Text className="text-black text-[24px] font-extrabold">
-          {item.exercises.join("\n")}
-        </Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => startWorkout(index)}
-        className="absolute bottom-0 right-0 mr-5 mb-4 bg-general-1000 rounded-full w-[73px] h-[73px] items-center justify-center"
-      >
-        <Text className="text-white font-bold text-[24px] ">Start</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
   return (
-    <SafeAreaView className="flex-1 bg-white items-center justify-between">
-      <View className="flex flex-col absolute top-0 bottom-0 left-0 right-0">
-        <View className="w-full h-[137px]">
+    <SafeAreaView className="flex-1 bg-white">
+      <View className="flex-1">
+        {/* Header */}
+        <View className="w-full h-[137px] mb-2">
           <Image
             source={images.homeHeader}
             resizeMode="cover"
-            className="w-full h-[160px]"
+            className="w-full h-[160px] absolute"
           />
           <Image
             source={images.animoji}
             resizeMode="contain"
             className="w-[84px] h-[84px] absolute top-[32px] left-4"
           />
-          <Text className="text-[24px] font-bold text-white text-left absolute top-[50px] left-[110px]">
+          <Text className="text-[24px] font-bold text-white absolute top-[50px] left-[110px]">
             Hello👋{"\n"}
             {username}
           </Text>
-          <View className="w-[54px] h-[54px] absolute top-[50px] right-[20px] rounded-full bg-white items-center justify-center">
+          <View className="w-[54px] h-[54px] absolute top-[50px] right-[20px] rounded-full bg-white items-center justify-center shadow">
             <Image
               source={icons.logOut}
               resizeMode="contain"
@@ -94,14 +70,49 @@ const Detail = () => {
             />
           </View>
         </View>
-        <View className="flex flex-col bg-white p-3">
+        {/* Exercise List */}
+        <View className="flex-1 bg-white px-4 pt-2 pb-0">
+          <Text className="text-[28px] font-bold mb-4 text-center text-general-1000">
+            Exercises
+          </Text>
           <FlatList
-            data={workouts}
-            renderItem={renderWorkout}
-            keyExtractor={(item) => item.id}
+            data={exercises}
+            keyExtractor={(item, idx) => idx.toString()}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 32 }}
+            renderItem={({ item }) => (
+              <View className="mb-3 px-5 py-4 bg-secondary-1000 rounded-2xl shadow flex-row items-center">
+                <View className="w-4 h-4 rounded-full bg-general-1000 mr-4" />
+                <Text className="text-[18px] font-semibold text-black">
+                  {item}
+                </Text>
+              </View>
+            )}
           />
         </View>
+        {/* Start Button - fixed above bottom nav bar using SafeAreaView inset */}
+        <SafeAreaView
+          edges={["bottom"]}
+          className="absolute left-0 right-0 items-center"
+          style={{ bottom: 52, backgroundColor: "transparent" }}
+        >
+          <TouchableOpacity
+            onPress={startWorkout}
+            className="bg-general-1000 rounded-full w-[90px] h-[90px] items-center justify-center shadow-lg mb-4"
+            activeOpacity={0.85}
+            style={{
+              shadowColor: "#FC713A",
+              shadowOffset: { width: 0, height: 8 },
+              shadowOpacity: 0.25,
+              shadowRadius: 16,
+              elevation: 8,
+            }}
+          >
+            <Text className="text-white font-extrabold text-[22px] tracking-wide uppercase">
+              Start
+            </Text>
+          </TouchableOpacity>
+        </SafeAreaView>
       </View>
     </SafeAreaView>
   );

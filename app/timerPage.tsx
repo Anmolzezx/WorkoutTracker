@@ -6,7 +6,7 @@ import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { router, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const EXERCISE_DURATION = 30; // seconds
+const EXERCISE_DURATION = 5; // seconds
 
 export default function TimerPage() {
   const params = useLocalSearchParams();
@@ -47,15 +47,24 @@ export default function TimerPage() {
   return (
     <SafeAreaView className="flex-1 bg-white items-center ">
       <View className="flex flex-col absolute top-0 bottom-0 left-0 right-0">
-        <View className=" w-full h-[80px] bg-white rounded-full shadow-md shadow-neutral-400/70 justify-center mt-5">
-          <TouchableOpacity onPress={() => router.back()}>
+        <View className="w-full h-[80px] bg-white rounded-full shadow-md shadow-neutral-400/70 justify-center mt-5">
+          <TouchableOpacity
+            onPress={() => {
+              if (router.canGoBack?.()) {
+                router.back();
+              } else {
+                router.replace("/(tabs)/home");
+              }
+            }}
+            className="absolute top-[10px] left-8 z-10"
+          >
             <Image
               source={icons.backArrow}
               resizeMode="contain"
-              className="w-[30px] h-[30px] absolute top-[10px] left-8"
+              className="w-[30px] h-[30px]"
             />
           </TouchableOpacity>
-          <Text className="text-black text-[30px] text-center font-bold   ">
+          <Text className="text-black text-[30px] text-center font-bold">
             {workoutName}
           </Text>
         </View>
@@ -94,7 +103,7 @@ export default function TimerPage() {
                 setIsPlaying((p) => !p);
                 Vibration.vibrate(10);
               }}
-              className="w-[60px] h-[60px] rounded-full bg-white items-center justify-center mr-8 shadow"
+              className="w-[60px] h-[60px] rounded-full bg-white items-center justify-center mr-8 "
             >
               <Image
                 source={icons.pause}
@@ -110,7 +119,7 @@ export default function TimerPage() {
                 Vibration.vibrate(10);
                 router.replace("/(tabs)/home");
               }}
-              className="w-[60px] h-[60px] rounded-full bg-white items-center justify-center shadow"
+              className="w-[60px] h-[60px] rounded-full bg-white items-center justify-center "
             >
               <Image
                 source={icons.quit}
