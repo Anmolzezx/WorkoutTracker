@@ -38,13 +38,15 @@ export default function HomeScreen() {
   const renderWorkout = ({ item }: { item: (typeof workouts)[0] }) => (
     <View className="flex bg-secondary-1000 W-[363px] h-[164px] rounded-[65px] mt-8 mr-4 ml-4 ">
       <View className="justify-center items-center">
-        <Text className="text-black text-[24px] font-bold ">{item.name}</Text>
+        <Text className="text-black text-[24px] font-MulishBold ">
+          {item.name}
+        </Text>
       </View>
       <View className="items-start ml-[45px]">
-        <Text className="text-[30px] font-bold text-general-1000 ">
+        <Text className="text-[30px] font-MulishBold text-general-1000 ">
           Exercise
         </Text>
-        <Text className="text-black text-[24px] font-extrabold">
+        <Text className="text-black text-[24px] font-MulishRegular">
           {item.exercises.join("\n")}
         </Text>
       </View>
@@ -52,7 +54,7 @@ export default function HomeScreen() {
         onPress={() => timer(item)}
         className="absolute bottom-0 right-0 mr-5 mb-4 bg-general-1000 rounded-full w-[73px] h-[73px] items-center justify-center"
       >
-        <Text className="text-white font-bold text-[24px] ">Start</Text>
+        <Text className="text-white font-MulishBold text-[24px] ">Start</Text>
       </TouchableOpacity>
     </View>
   );
@@ -71,7 +73,7 @@ export default function HomeScreen() {
             resizeMode="contain"
             className="w-[84px] h-[84px] absolute top-[32px] left-4"
           />
-          <Text className="text-[24px] font-bold text-white text-left absolute top-[50px] left-[110px]">
+          <Text className="text-[24px] font-MulishBold text-white text-left absolute top-[50px] left-[110px]">
             Hello👋{"\n"}
             {username}
           </Text>

@@ -14,7 +14,13 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    MulishBold: require("../assets/fonts/Mulish-Bold.ttf"),
+    MulishExtraBold: require("../assets/fonts/Mulish-ExtraBold.ttf"),
+    MulishExtraLight: require("../assets/fonts/Mulish-ExtraLight.ttf"),
+    MulishLight: require("../assets/fonts/Mulish-Light.ttf"),
+    MulishMedium: require("../assets/fonts/Mulish-Medium.ttf"),
+    MulishRegular: require("../assets/fonts/Mulish-Regular.ttf"),
+    MulishSemiBold: require("../assets/fonts/Mulish-SemiBold.ttf"),
   });
 
   if (!loaded) {

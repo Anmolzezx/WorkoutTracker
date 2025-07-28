@@ -33,7 +33,7 @@ const Detail = () => {
             resizeMode="contain"
             className="w-[84px] h-[84px] absolute top-[32px] left-4"
           />
-          <Text className="text-[24px] font-bold text-white absolute top-[50px] left-[110px]">
+          <Text className="text-[24px] font-MulishBold text-white absolute top-[50px] left-[110px]">
             Hello👋{"\n"}
             {username}
           </Text>
@@ -46,7 +46,7 @@ const Detail = () => {
           </View>
         </View>
         <View className="flex-1 bg-white px-4 pt-2 pb-0">
-          <Text className="text-[32px] font-bold mb-4 text-center text-general-1000">
+          <Text className="text-[32px] font-MulishBold mb-4 text-center text-general-1000">
             Exercises
           </Text>
           <FlatList
@@ -57,7 +57,7 @@ const Detail = () => {
             renderItem={({ item }) => (
               <View className="mb-3 px-5 py-4 bg-secondary-1000 rounded-2xl shadow flex-row items-center">
                 <View className="w-4 h-4 rounded-full bg-general-1000 mr-4" />
-                <Text className="text-[18px] font-semibold text-black">
+                <Text className="text-[18px] font-MulishSemiBold text-black">
                   {item}
                 </Text>
               </View>
