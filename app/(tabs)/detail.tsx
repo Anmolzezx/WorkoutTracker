@@ -1,33 +1,9 @@
 import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { icons, images } from "@/constants";
+import { icons, images, exercises } from "@/constants";
 import { auth } from "@/lib/firebase";
 import { router } from "expo-router";
 import React from "react";
-
-// Expanded exercise list, different from home.tsx
-const exercises = [
-  "Plank",
-  "High Knees",
-  "Russian Twists",
-  "Superman",
-  "Bicycle Crunches",
-  "Wall Sit",
-  "Jump Squats",
-  "Reverse Lunges",
-  "Side Plank",
-  "Flutter Kicks",
-  "Bear Crawl",
-  "Donkey Kicks",
-  "Inchworms",
-  "Toe Touches",
-  "Skaters",
-  "Mountain Climbers",
-  "V-Ups",
-  "Jumping Lunges",
-  "Single Leg Glute Bridge",
-  "Dead Bug",
-];
 
 const Detail = () => {
   const email = auth.currentUser?.email;
@@ -44,14 +20,13 @@ const Detail = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1">
-        {/* Header */}
+    <SafeAreaView className="flex-1 bg-white ">
+      <View className="flex absolute top-0 bottom-0 left-0 right-0">
         <View className="w-full h-[137px] mb-2">
           <Image
             source={images.homeHeader}
             resizeMode="cover"
-            className="w-full h-[160px] absolute"
+            className="w-full h-[160px]"
           />
           <Image
             source={images.animoji}
@@ -70,9 +45,8 @@ const Detail = () => {
             />
           </View>
         </View>
-        {/* Exercise List */}
         <View className="flex-1 bg-white px-4 pt-2 pb-0">
-          <Text className="text-[28px] font-bold mb-4 text-center text-general-1000">
+          <Text className="text-[32px] font-bold mb-4 text-center text-general-1000">
             Exercises
           </Text>
           <FlatList
@@ -90,12 +64,8 @@ const Detail = () => {
             )}
           />
         </View>
-        {/* Start Button - fixed above bottom nav bar using SafeAreaView inset */}
-        <SafeAreaView
-          edges={["bottom"]}
-          className="absolute left-0 right-0 items-center"
-          style={{ bottom: 52, backgroundColor: "transparent" }}
-        >
+
+        <View className="absolute left-0 right-0 items-center bottom-[90px] bg-transparent">
           <TouchableOpacity
             onPress={startWorkout}
             className="bg-general-1000 rounded-full w-[90px] h-[90px] items-center justify-center shadow-lg mb-4"
@@ -112,7 +82,7 @@ const Detail = () => {
               Start
             </Text>
           </TouchableOpacity>
-        </SafeAreaView>
+        </View>
       </View>
     </SafeAreaView>
   );

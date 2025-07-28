@@ -6,40 +6,45 @@ import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { router, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const EXERCISE_DURATION = 5; // seconds
+const EXERCISE_DURATION = 5;
 
 export default function TimerPage() {
   const params = useLocalSearchParams();
   const exercises: string[] = params.exercises
     ? JSON.parse(params.exercises as string)
     : ["Exercise"];
+
   const workoutName: string = params.workoutName
     ? String(params.workoutName)
     : "Workout";
   const [exerciseIdx, setExerciseIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  // On timer complete, advance or finish
-  const handleComplete = async () => {
+  const handleComplete = () => {
     Vibration.vibrate(100);
     if (exerciseIdx < exercises.length - 1) {
       setExerciseIdx((idx) => idx + 1);
       setIsPlaying(false);
-      setTimeout(() => setIsPlaying(true), 300); // restart timer
+      setTimeout(() => setIsPlaying(true), 300);
       return { shouldRepeat: false };
     } else {
-      // Log to history
-      const today = new Date().toISOString().slice(0, 10);
-      const entry = { workoutName, date: today };
-      try {
-        const prev = await AsyncStorage.getItem("workoutHistory");
-        const history = prev ? JSON.parse(prev) : [];
-        await AsyncStorage.setItem(
-          "workoutHistory",
-          JSON.stringify([...history, entry]),
-        );
-      } catch {}
-      router.replace({ pathname: "/(tabs)/history" });
+      (async () => {
+        const today = new Date().toISOString().slice(0, 10);
+        const entries = exercises.map((exercise) => ({
+          exercise,
+          workoutName,
+          date: today,
+        }));
+        try {
+          const prev = await AsyncStorage.getItem("workoutHistory");
+          const history = prev ? JSON.parse(prev) : [];
+          await AsyncStorage.setItem(
+            "workoutHistory",
+            JSON.stringify([...history, ...entries]),
+          );
+        } catch {}
+        router.replace({ pathname: "/(tabs)/history" });
+      })();
       return { shouldRepeat: false };
     }
   };

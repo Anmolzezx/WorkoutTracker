@@ -33,3 +33,44 @@ export const icons = {
   pause,
   quit,
 };
+
+export const workouts = [
+  {
+    id: "1",
+    name: "Full Body",
+    exercises: ["Jumping Jacks", "Mountain Climbers", "Burpees"],
+  },
+  {
+    id: "2",
+    name: "Upper Body",
+    exercises: ["Push Ups", "Shoulder Taps", "Tricep Dips"],
+  },
+  {
+    id: "3",
+    name: "Lower Body",
+    exercises: ["Squats", "Lunges", "Glute Bridge"],
+  },
+];
+
+export const exercises = [
+  "Plank",
+  "High Knees",
+  "Russian Twists",
+  "Superman",
+  "Bicycle Crunches",
+  "Wall Sit",
+  "Jump Squats",
+  "Reverse Lunges",
+  "Side Plank",
+  "Flutter Kicks",
+  "Bear Crawl",
+  "Donkey Kicks",
+  "Inchworms",
+  "Toe Touches",
+  "Skaters",
+  "Mountain Climbers",
+  "V-Ups",
+  "Jumping Lunges",
+  "Single Leg Glute Bridge",
+  "Dead Bug",
+];

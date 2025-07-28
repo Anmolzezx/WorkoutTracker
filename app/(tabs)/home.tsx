@@ -7,28 +7,11 @@ import {
   FlatList,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { icons, images } from "@/constants";
+import { icons, images, workouts } from "@/constants";
 import { auth } from "@/lib/firebase";
 import { router } from "expo-router";
 import { signOut } from "firebase/auth";
-
-const workouts = [
-  {
-    id: "1",
-    name: "Full Body",
-    exercises: ["Jumping Jacks", "Mountain Climbers", "Burpees"],
-  },
-  {
-    id: "2",
-    name: "Upper Body",
-    exercises: ["Push Ups", "Shoulder Taps", "Tricep Dips"],
-  },
-  {
-    id: "3",
-    name: "Lower Body",
-    exercises: ["Squats", "Lunges", "Glute Bridge"],
-  },
-];
+import React from "react";
 
 export default function HomeScreen() {
   const email = auth.currentUser?.email;
