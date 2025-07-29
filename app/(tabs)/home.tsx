@@ -42,11 +42,11 @@ export default function HomeScreen() {
           {item.name}
         </Text>
       </View>
-      <View className="items-start ml-[45px]">
-        <Text className="text-[30px] font-MulishBold text-general-1000 ">
-          Exercise
-        </Text>
-        <Text className="text-black text-[24px] font-MulishRegular">
+      <View
+        className="items-start ml-[45px]
+      mt-8"
+      >
+        <Text className="text-black text-[20px] ">
           {item.exercises.join("\n")}
         </Text>
       </View>

@@ -1,9 +1,17 @@
-import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+  FlatList,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images, exercises } from "@/constants";
 import { auth } from "@/lib/firebase";
 import { router } from "expo-router";
 import React from "react";
+import { signOut } from "firebase/auth";
 
 const Detail = () => {
   const email = auth.currentUser?.email;
@@ -17,6 +25,16 @@ const Detail = () => {
         workoutName: "All Exercises",
       },
     });
+  };
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        Alert.alert("Success", "You are logged out");
+        router.replace("/welcome");
+      })
+      .catch((err) => {
+        Alert.alert("Error", err.message);
+      });
   };
 
   return (
@@ -37,13 +55,16 @@ const Detail = () => {
             Hello👋{"\n"}
             {username}
           </Text>
-          <View className="w-[54px] h-[54px] absolute top-[50px] right-[20px] rounded-full bg-white items-center justify-center shadow">
+          <TouchableOpacity
+            onPress={logout}
+            className="w-[54px] h-[54px] absolute top-[50px] right-[20px] rounded-full bg-white items-center justify-center"
+          >
             <Image
               source={icons.logOut}
               resizeMode="contain"
               className="w-[24px] h-[20px]"
             />
-          </View>
+          </TouchableOpacity>
         </View>
         <View className="flex-1 bg-white px-4 pt-2 pb-0">
           <Text className="text-[32px] font-MulishBold mb-4 text-center text-general-1000">
