@@ -63,16 +63,25 @@ This project uses:
 - **ESLint** – for static code analysis and catching issues
 - **Prettier** – for consistent code formatting
 
-## 📸 Screenshots
+<h2>📸 Screenshots</h2>
 
-Include images in a folder like `/assets/screenshot/`.
+<p align="center">
+  <img src="./assets/screenshot/welcome.jpg" width="180" alt="Welcome Screen"/>
+  <img src="./assets/screenshot/signUp.jpg" width="180" alt="Sign Up Screen"/>
+  <img src="./assets/screenshot/signIn.jpg" width="180" alt="Sign In Screen"/>
+</p>
 
-assets/screenshot/WhatsApp Image 2025-07-24 at 20.15.20_8af2ca61.jpg
----
+<p align="center">
+  <img src="./assets/screenshot/home.jpg" width="180" alt="Home Screen"/>
+  <img src="./assets/screenshot/detail.jpg" width="180" alt="Workout Detail"/>
+  <img src="./assets/screenshot/history.jpg" width="180" alt="History Tab"/>
+</p>
+
+
 
 ## 📹 Screencast
 
-[Click to view the screencast](Demo/demoVideo.mp4)
+[Click to view the screencast](demo/demo.mp4)
 
 
 
